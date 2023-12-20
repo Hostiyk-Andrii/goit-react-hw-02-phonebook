@@ -1,11 +1,13 @@
-import { Phonebook } from "./Phonebook/Phonebook";
+import Phonebook from './Phonebook/Phonebook';
+import ContactBook from './Phonebook2/ContactBook';
+
 
 export const App = () => {
   return (
     <div
       style={{
         height: '100vh',
-        display: 'flex',
+        display: 'blokc',
         justifyContent: 'center',
         alignItems: 'center',
         fontSize: 40,
@@ -13,6 +15,7 @@ export const App = () => {
       }}
     >
       <Phonebook />
+     
     </div>
   );
 };

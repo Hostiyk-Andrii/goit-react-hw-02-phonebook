@@ -1,40 +1,49 @@
 import { Component } from 'react';
 
-export class PhonebookForm extends Component {
-  state = {
-    contacts: [],
-    name: '',
+class PhonebookForm extends Component {
+  state = { name: '', phone: '' };
+  handelChange = event => {
+    this.setState({ [event.target.name]: event.target.value });
   };
-    handelChangeName = event => {
-      this.setState({ name: event.target.value });
-    };
- 
-//   handelChange = event => {
-//     this.setState({ [event.target.name]: event.target.value });
-//   };
-  hendelSubmit = event => {
+  handelSubmit = event => {
     event.preventDefault();
-    this.setState({ name: ''});
+    this.props.onSubmit(this.state.name, this.state.phone);
+   
+    this.reset();
+  };
+  reset = () => {
+    this.setState({ name: '' });
+    this.setState({ phone: '' });
   };
   render() {
     return (
-      <form onSubmit={this.hendelSubmit}>
-        <div>
+      <>
+        <form onSubmit={this.handelSubmit}>
           <label>
-            <p>Name</p>
+            Name
             <input
               type="text"
               name="name"
-              onChange={this.handelChangeName}
-              pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
-              title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
-              required
+              value={this.state.name}
+              onChange={this.handelChange}
+             
             />
           </label>
-        </div>
-
-        <button type="submit">Add contact</button>
-      </form>
+          <label>
+            Phone
+            <input
+              type="text"
+              name="phone"
+              value={this.state.phone}
+              onChange={this.handelChange}
+            
+            />
+          </label>
+          <button>Add contact</button>
+        </form>
+      </>
     );
   }
 }
+
+export default PhonebookForm;
